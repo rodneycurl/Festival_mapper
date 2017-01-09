@@ -1,51 +1,85 @@
-<script>var GOOGLE_API_KEY="#{ENV['GOOGLE_API_KEY']}"</script>
 <script src="//maps.google.com/maps/api/js?key=AIzaSyD8pKOZ2PA1M4F1l_r9hAbwbkV_L4Mdxjs"></script>
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>-->
 
-<h1>Listing Festivals</h1>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @festivals.each do |festival| %>
-      <tr>
-        <td><%= festival.latitude %></td>
-        <td><%= festival.longitude %></td>
-        <td><%= festival.name %></td>
-        <td><%= festival.address %></td>
-        <td><%= link_to 'Show', festival %></td>
-        <td><%= link_to 'Edit', edit_festival_path(festival) %></td>
-        <td><%= link_to 'Destroy', festival, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<div style='width: 1200px;'>
-  <div id="map" style='width: 1200px; height: 400px;'></div>
+
+
+
+
+<div id="control">
+		<h2>Find Events Near You</h2>
+		<p>We'll help you find events in your community</p>
+		<form method="get" id="chooseZip">
+			<button type="submit" class="learnButton">Use current location</button>
+			<button type="button" id="searchZip" class="learnButton">Search by Zip Code</button>
+			<div class="clear"></div>
+			<div class="zipSearch">
+				<input id="textZip" type="text" name="zip" placeholder="enter your zip code" autofocus>
+				<button type="submit" class="learnButton">Search</button>
+			</div>
+			<div class="clear"></div>
+		</form>
+		
+		<p>If you've found EventMap helpful, please help spread the word!</p>
+		
+		<div class="social">
+		
+		<!--	<div class="twitter">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-via="pauldessert">Tweet</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			</div>
+			
+			<div class="facebook">
+				<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.seedtip.com&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21&amp;appId=752601418144350" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>		
+			</div>-->
+
+		
+		</div>
+		<div class="clear"></div>
+		<div id="results"></div>
+	  <h1>Listing Festivals</h1>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <!--<th>Latitude</th>-->
+          <!--<th>Longitude</th>-->
+          <th>Name</th>
+          <th>Venue</th>
+        </tr>
+      </thead>
+    
+      <tbody>
+        <% @fetched_festivals.each do |festival| %>
+          <tr>
+            <!--<td><%= festival["latitude"] %></td>-->
+            <!--<td><%= festival["longitude"] %></td>-->
+            <td><%= festival["title"] %></td>
+            <td><%= festival["venue_name"] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= link_to 'New Festival', new_festival_path %>
 </div>
-<script type="text/javascript" >
-handler = Gmaps.build('Google');
-handler.buildMap({
-  provider: {  },
-  internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers(<%=raw @hash.to_json %>);
-  handler.bounds.extendWith(markers);
-  handler.fitMapToBounds(); 
-  handler.getMap().setZoom(4);
-});
-</script>
-
-<br>
-
-<%= link_to 'New Festival', new_festival_path %>
+<div id="map-canvas">
+  <div style='width: 100%;'>
+    <div id="map" style='width: 100%; height: 1400px;'></div>
+  </div>
+  <script type="text/javascript" >
+  handler = Gmaps.build('Google');
+  handler.buildMap({
+    provider: {  },
+    internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds(); 
+    handler.getMap().setZoom(10);
+    handler.getMap().setCenter(bounds.getCenter());
+	//	handler.getMap().setCenter({lat: 37.09024, lng: -100.712891});
+  });
+  </script>
+</div>

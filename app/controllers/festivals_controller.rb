@@ -4,12 +4,18 @@ class FestivalsController < ApplicationController
   # GET /festivals
   # GET /festivals.json
   def index
-    @festivals = Festival.all
-    @hash = Gmaps4rails.build_markers(@festivals) do |festival, marker|
-      marker.lat festival.latitude
-      marker.lng festival.longitude
-      marker.infowindow festival.name
-    end
+#    @festivals = Festival.all
+ #   @hash = Gmaps4rails.build_markers(@festivals) do |festival, marker|
+#      marker.lat festival.latitude
+#      marker.lng festival.longitude
+#      marker.infowindow festival.name
+#    end
+    @fetched_festivals = Festival.eventful_festivals
+    @hash = Gmaps4rails.build_markers(@fetched_festivals) do |festival, marker|
+      marker.lat festival["latitude"]
+      marker.lng festival["longitude"]
+      marker.infowindow festival["title"]
+    end    
   end
 
   # GET /festivals/1
@@ -66,6 +72,8 @@ class FestivalsController < ApplicationController
     end
   end
 
+
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_festival
