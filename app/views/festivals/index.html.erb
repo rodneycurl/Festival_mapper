@@ -2,13 +2,6 @@
 <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
 <!--<p id="notice"><%= notice %></p>-->
-
-
-
-
-
-
-
 <div id="control">
 		<h2>Find Events Near You</h2>
 		<p>We'll help you find events in your community</p>
@@ -22,10 +15,7 @@
 			</div>
 			<div class="clear"></div>
 		</form>
-		
-		<p>If you've found EventMap helpful, please help spread the word!</p>
-		
-		<div class="social">
+	    <div class="social">
 		
 		<!--	<div class="twitter">
 				<a href="https://twitter.com/share" class="twitter-share-button" data-via="pauldessert">Tweet</a>
@@ -41,7 +31,6 @@
 		<div class="clear"></div>
 		<div id="results"></div>
 	  <h1>Listing Festivals</h1>
-
     <table class="table table-hover">
       <thead>
         <tr>
@@ -66,20 +55,8 @@
     <%= link_to 'New Festival', new_festival_path %>
 </div>
 <div id="map-canvas">
-  <div style='width: 100%;'>
-    <div id="map" style='width: 100%; height: 1400px;'></div>
+  <div id="map-container">
+    <div id="map"></div>
   </div>
-  <script type="text/javascript" >
-  handler = Gmaps.build('Google');
-  handler.buildMap({
-    provider: {  },
-    internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds(); 
-    handler.getMap().setZoom(10);
-    handler.getMap().setCenter(bounds.getCenter());
-	//	handler.getMap().setCenter({lat: 37.09024, lng: -100.712891});
-  });
-  </script>
+  <%= render 'layouts/map' %>
 </div>
