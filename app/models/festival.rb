@@ -7,8 +7,10 @@ class Festival < ActiveRecord::Base
       def self.eventful_festivals
         dclatitude = "38.9072"
         dclongitude = "-77.0369"
-        latlong = dclatitude + "," + dclongitude
-        @options = { query: { app_key: ENV["EVENTFUL_API_KEY"], q: "music", l: latlong, within: "10", units: "miles"} }
+        houstonlatitude = "29.7604"
+        houstonlongitude = "-95.3698"
+        latlong = houstonlatitude + "," + houstonlongitude
+        @options = { query: { app_key: ENV["EVENTFUL_API_KEY"], q: "music", l: latlong, within: "10", units: "miles", page_number: "1"} }
         self.get("/search", @options)['search']['events']['event']
       end
       
@@ -22,11 +24,11 @@ class Festival < ActiveRecord::Base
       #   #response['search']['events']['event'].first\
       # end
       
-      #stopped here and need to figure out how to get this to work
-      def self.festivals lat,lng
+      def self.near_by lat, long
           default_params q: "music"
-          format :json
-          get("", query: {l:lat+","+lng})['search']["events"]["event"]
-          
+          latlong = lat + "," + long
+          @options = { query: { app_key: ENV["EVENTFUL_API_KEY"], q: "music", l: latlong, within: "10", units: "miles", page_number: "1"} }
+          self.get("/search", @options)['search']["events"]["event"]
       end
+    
 end

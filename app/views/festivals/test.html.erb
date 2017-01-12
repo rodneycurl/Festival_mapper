@@ -1,0 +1,34 @@
+<% content_for :scripts do %>
+  <script type="text/javascript" charset="utf-8">
+    $(function(){
+      $("#replace_markers").click(function(){
+        $.getJSON("/festivals/test.json", function(data){
+          Gmaps4Rails.replace_markers(data)
+        });
+      });
+    });
+  </script>
+<% end %>
+<h1>Listing festivals</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Gmaps</th>
+  </tr>
+<% @festivals.each do |festival| %>
+  <tr>
+    <td><%= festival.name %></td>
+    <td><%= festival.address %></td>
+    <td><%= festival.longitude %></td>
+    <td><%= festival.latitude %></td>
+    <td><%= festival.gmaps %></td>
+  </tr>
+<% end %>  
+</table>
+
+<br/>
+
+<button id="replace_markers">Refresh Markers</button>

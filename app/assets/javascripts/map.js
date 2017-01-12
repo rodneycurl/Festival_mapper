@@ -11,6 +11,7 @@ $(function() {
 		// var infowindow = null;
 		var pos;
 	  var userCords;
+	  var newMarkers;
 		//Start geolocation
 		
 		if (navigator.geolocation) {    
@@ -28,15 +29,7 @@ $(function() {
 				alert('Geolocation is not supported in your browser');
 		}
 	
-// 	//Adding infowindow option
-// 	infowindow = new google.maps.InfoWindow({
-// 		content: "holding..."
-// 	});
-	
-	//Fire up Google maps and place inside the map-canvas div
- 	//map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-	//grab form data
+	//grab form data - needs to be updated like replace_markers
     $('#chooseZip').submit(function() { // bind function to submit event of form
 		  var userZip = $("#textZip").val();
 		  console.log("This-> " + userCords.latitude);
@@ -45,29 +38,32 @@ $(function() {
 			} else {
 				console.log('Geolocation was successful:'+userCords.latitude+userCords.longitude);
 				//accessURL = "http://api.eventful.com/rest/events/search?app_key=Pk4pz3Sz3DPfkwCN&q=music" + "&l="+userCords.latitude + "," + userCords.longitude + "&within=10&units=miles&callback=?"
-		}
-			//http://api.eventful.com/rest/events/search?app_key=[key]&l=GREEN+BAY+WEST&page_size=100
-			//http://eventful.com/events?q=music&l=92103&within=10&units=miles
-			//http://api.eventful.com/rest/events/search?app_key=[key]&l=32.746682,%20-117.162741&within=5&unit=miles&page_size=100
-			//Use the zip code and return all market ids in area.
-		// 	$.ajax({
-		// 		type: "GET",
-		// 		contentType: "application/xml",
-  //   			dataType: "xml",
-  //   			url: accessURL,
-		// 		success: function (data) {
-		// 			 var parsedData = $.parseXML(data)	
-		// 			 $.each(parsedData, function (i, val) {
-		// 				marketId.push(val.title);
-		// 				marketName.push(val.city_name);
-		// 			 });
-						
-		// 			//console.log(marketName);
-					
-		// 		}
-		// 	})
+			}
 
-        return false; // important: prevent the form from submitting
+			$.ajax({
+	        url : "/festivals/near",
+	        type : "GET",
+	        data : { lat: userCords.latitude, long: userCords.longitude },
+	        dataType: 'html',
+	        success:  Gmaps.map.serviceObject.replaceMarkers(json)
+	     
     });
+   
+		// 			//console.log(marketName);
+		return false; // important: prevent the form from submitting    		
+	});
+	
+  $("#replace_markers").click(function(){
+        $.getJSON("/festivals/near.json", { lat: userCords.latitude, long: userCords.longitude }, function(newMarkers){
+        	console.log("Data:"+newMarkers);
+           handler.removeMarkers(markers); // to remove previous markers
+           markers = handler.addMarkers(newMarkers);
+           handler.bounds.extendWith(markers);
+    			 handler.fitMapToBounds(); 
+    			// handler.getMap().setCenter(handler.getbounds.getCenter());
+    			// handler.getMap().setZoom(10);
+    
+        });
+      });
+   
 });
-

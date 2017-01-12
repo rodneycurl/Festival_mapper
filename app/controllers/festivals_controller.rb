@@ -1,8 +1,15 @@
 class FestivalsController < ApplicationController
-  before_action :set_festival, only: [:show, :edit, :update, :destroy]
+  #before_action :set_festival, only: [:show, :edit, :update, :destroy]
 
   # GET /festivals
   # GET /festivals.json
+  
+  respond_to :json, :html
+    
+  def fetch
+    @fetched_festivals = Festival.eventful_festivals
+    respond_with @json
+  end
   def index
 #    @festivals = Festival.all
  #   @hash = Gmaps4rails.build_markers(@festivals) do |festival, marker|
@@ -72,6 +79,24 @@ class FestivalsController < ApplicationController
     end
   end
 
+  def near
+      @lat = params[:lat]
+      @long = params[:long]
+  	  @fetched_festivals = Festival.near_by(@lat, @long)
+  	  @hash = Gmaps4rails.build_markers(@fetched_festivals) do |festival, marker|
+        marker.lat festival["latitude"]
+        marker.lng festival["longitude"]
+        marker.infowindow festival["title"]
+      end    
+      logger.debug "Festival hash: #{@hash.inspect}"
+      respond_with @hash
+      #render 'layouts/table'
+      #render none
+      #render 'layouts/map'
+    #  render index
+  #    render json: { festivals: @festivals_nearby }
+   
+  end
 
   
   private

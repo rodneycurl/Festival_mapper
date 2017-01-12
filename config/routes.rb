@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :festivals
+  resources :festivals do
+    collection do
+      get 'near'
+      get 'fetch'
+    end
+  end
   root 'festivals#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
