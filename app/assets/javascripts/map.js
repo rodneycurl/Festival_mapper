@@ -7,6 +7,8 @@ $(function() {
 	  var userCords;
 	  var newMarkers;
 	  var fetchedFestivals;
+	  var type;
+	  var path;
 		//Start geolocation
 		var toType = function(obj) {
   		return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
@@ -28,12 +30,13 @@ $(function() {
     $('#chooseZip').submit(function() { // bind function to submit event of form
 		  var userZip = $("#textZip").val();
 		 	if(userZip){
-				//accessURL = "https://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + userZip;
+				data={zip: userZip};
+				path="/festivals/near_zip.json"
 			} else {
-				//console.log('Geolocation was successful:'+userCords.latitude+userCords.longitude);
-				//accessURL = "http://api.eventful.com/rest/events/search?app_key=Pk4pz3Sz3DPfkwCN&q=music" + "&l="+userCords.latitude + "," + userCords.longitude + "&within=10&units=miles&callback=?"
+				data={lat: userCords.latitude, long: userCords.longitude};
+				path="/festivals/near_latlong.json"
 			}
-			$.getJSON("/festivals/near.json", { lat: userCords.latitude, long: userCords.longitude }, function(response){
+			$.getJSON(path, { data }, function(response){
 				fetchedFestivals = response.fetched_festivals;
 				var markerHash = response.hash;
 				handler.removeMarkers(markers); // to remove previous markers

@@ -73,10 +73,10 @@ class FestivalsController < ApplicationController
     end
   end
 
-  def near
-      @lat = params[:lat]
-      @long = params[:long]
-  	  @fetched_festivals = Festival.near_by(@lat, @long)
+  def near_zip 
+      @zip = params[:data][:zip]
+       logger.debug "zip=  #{@zip}"
+      @fetched_festivals = Festival.near_zip(@zip)
   	  @hash = Gmaps4rails.build_markers(@fetched_festivals) do |festival, marker|
         marker.lat festival["latitude"]
         marker.lng festival["longitude"]
@@ -84,15 +84,22 @@ class FestivalsController < ApplicationController
       end    
        @response = {:hash => @hash, :fetched_festivals => @fetched_festivals}
        respond_with @response
-       #render json: { festivals: @festivals_nearby }
-     
-      #render :partial => 'layouts/map'
-      #render 'layouts/table'
-      #render none
-      #render 'layouts/map'
-    #  render index
-  #    render json: { festivals: @festivals_nearby }
-   
+  end
+  
+  
+  def near_latlong
+      @lat = params[:data][:lat]
+      @long = params[:data][:long]
+      logger.debug "lat=  #{@lat}"
+      logger.debug "long= #{@long}"
+  	  @fetched_festivals = Festival.near_latlong(@lat, @long)
+  	  @hash = Gmaps4rails.build_markers(@fetched_festivals) do |festival, marker|
+        marker.lat festival["latitude"]
+        marker.lng festival["longitude"]
+        marker.infowindow festival["title"]
+      end    
+       @response = {:hash => @hash, :fetched_festivals => @fetched_festivals}
+       respond_with @response
   end
 
   
@@ -106,4 +113,4 @@ class FestivalsController < ApplicationController
     def festival_params
       params.require(:festival).permit(:latitude, :longitude, :name, :address)
     end
-end
+ end

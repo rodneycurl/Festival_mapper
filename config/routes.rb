@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   resources :festivals do
     collection do
-      get 'near'
+      get 'near_zip'
+      get 'near_latlong'
       get 'fetch'
     end
   end

@@ -24,11 +24,16 @@ class Festival < ActiveRecord::Base
       #   #response['search']['events']['event'].first\
       # end
       
-      def self.near_by lat, long
-          default_params q: "music"
+      def self.near_zip zip
+        @options = { query: { app_key: ENV["EVENTFUL_API_KEY"], q: "music", l: zip, within: "10", units: "miles", page_number: "1"} }
+        self.get("/search", @options)['search']["events"]["event"]
+      end
+      
+      def self.near_latlong lat, long
           latlong = lat + "," + long
           @options = { query: { app_key: ENV["EVENTFUL_API_KEY"], q: "music", l: latlong, within: "10", units: "miles", page_number: "1"} }
           self.get("/search", @options)['search']["events"]["event"]
       end
+      
     
 end
