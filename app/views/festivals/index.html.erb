@@ -5,7 +5,10 @@
 <div id="control">
   <h2>Find Events Near You</h2>
   <p>We'll help you find events in your community</p>
-  <button id="replace_markers">Refresh Markers</button>
+  <!--<button id="replace_markers">Refresh Markers</button>--> 
+ <!-- %= form_tag("/festivals/near", method: "get") do %>-->
+ <!--   %= submit_tag("Use Current location"), remote: true -->
+ <!-- % end %>---->
   <form method="get" id="chooseZip">
   	<button type="submit" class="learnButton">Use current location</button>
   	<button type="button" id="searchZip" class="learnButton">Search by Zip Code</button>

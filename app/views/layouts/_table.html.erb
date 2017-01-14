@@ -1,20 +1,20 @@
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <!--<th>Latitude</th>-->
-        <!--<th>Longitude</th>-->
-        <th>Name</th>
-        <th>Venue</th>
-      </tr>
-    </thead>
-    <tbody id="content">
-     <% @fetched_festivals.each do |festival| %>
-      <tr>
-        <!--<td><%= festival["latitude"] %></td>-->
-        <!--<td><%= festival["longitude"] %></td>-->
-        <td><%= festival["title"] %></td>
-        <td><%= festival["venue_name"] %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+<table class="main-table table table-hover">
+  <thead>
+    <tr>
+      <!--<th>Latitude</th>-->
+      <!--<th>Longitude</th>-->
+      <th>Name</th>
+      <th>Venue</th>
+    </tr>
+  </thead>
+  <tbody id="content">
+   <% @fetched_festivals.each do |festival| %>
+    <tr>
+      <!--<td><%= festival["latitude"] %></td>-->
+      <!--<td><%= festival["longitude"] %></td>-->
+      <td><%= festival["title"] %></td>
+      <td><%= festival["venue_name"] %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
