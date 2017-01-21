@@ -5,24 +5,26 @@
 <div id="control">
   <h2>Find Events Near You</h2>
   <p>We'll help you find events in your community</p>
-  <!--<button id="replace_markers">Refresh Markers</button>--> 
- <!-- %= form_tag("/festivals/near", method: "get") do %>-->
- <!--   %= submit_tag("Use Current location"), remote: true -->
- <!-- % end %>---->
-  <form method="get" id="chooseZip">
-  	<button type="submit" class="learnButton">Use current location</button>
-  	<button type="button" id="searchZip" class="learnButton">Search by Zip Code</button>
-  	<div class="clear"></div>
-  	<div class="zipSearch">
-  		<input id="textZip" type="text" name="zip" placeholder="enter your zip code" autofocus>
-  		<button type="submit" class="learnButton">Search</button>
-  	</div>
-  	<div class="clear"></div>
-  </form>
+  <!--<form method="get" id="chooseZip">-->
+  <!--	<button type="submit" class="learnButton">Use current location</button>-->
+  <!--	<button type="button" id="searchZip" class="learnButton">Search by Zip Code</button>-->
+  <!--	<div class="clear"></div>-->
+  <!--	<div class="zipSearch">-->
+  <!--		<input id="textZip" type="text" name="zip" placeholder="enter your zip code" autofocus>-->
+  <!--		<button type="submit" class="learnButton">Search</button>-->
+  <!--	</div>-->
+  <!--	<div class="clear"></div>-->
+  <!--</form>-->
+  <%= button_to "Use current location", { action: "near_latlong"}, method: :get, class: "learnButton" %>  
+    <%= form_tag("/near_zip", method: "get") do %>
+    <%= label_tag(:chooseZip, "Search by Zip Code") %>
+    <%= text_field_tag("textZip", nil, placeholder: 'enter your zip code') %>
+    <%= submit_tag("Search", class: "learnButton") %>
+  <% end %>
   <%= render 'layouts/social' %>
   <div class="clear"></div>
   <div id="results"></div>
-  <h1>Listing Festivals</h1>
+  <h1>Events Near You</h1>
   <%= render 'layouts/table' %>
 </div>  
 <div id="map-canvas">

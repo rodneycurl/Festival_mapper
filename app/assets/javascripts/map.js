@@ -13,6 +13,13 @@ $(function() {
 		var toType = function(obj) {
   		return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
 		}
+		$('td').on('click', function (e) {
+    	myRowIndex = $(this).parent().index();
+  		  e.stopPropagation();
+		  	handler.getMap().setZoom(10);
+		  	map.setCenter(markers[1].getPosition());
+		});
+		
 		if (navigator.geolocation) {    
 			function error(err) {
 			  console.warn('ERROR(' + err.code + '): ' + err.message);
