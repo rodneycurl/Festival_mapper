@@ -12,6 +12,7 @@ class Festival < ActiveRecord::Base
         latlong = houstonlatitude + "," + houstonlongitude
         @options = { query: { app_key: ENV["EVENTFUL_API_KEY"], q: "music", l: latlong, within: "10", units: "miles", page_number: "1"} }
         self.get("/search", @options)['search']['events']['event']
+        
       end
       
       # def self.old_eventful_festivals

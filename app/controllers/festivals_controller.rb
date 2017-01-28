@@ -1,10 +1,11 @@
 class FestivalsController < ApplicationController
+  require 'json'
   #before_action :set_festival, only: [:show, :edit, :update, :destroy]
 
   # GET /festivals
   # GET /festivals.json
-  
-  respond_to :json, :html
+  #respond_to :json, only: [:near_zip, :near_latlong]
+  #respond_to :html
     
   def fetch
     @fetched_festivals = Festival.eventful_festivals
@@ -73,17 +74,17 @@ class FestivalsController < ApplicationController
     end
   end
 
-  def near_zip 
-      @zip = params[:data][:zip]
-       logger.debug "zip=  #{@zip}"
+  def near_zip
+      @zip = params[:textZip]
       @fetched_festivals = Festival.near_zip(@zip)
-  	  @hash = Gmaps4rails.build_markers(@fetched_festivals) do |festival, marker|
-        marker.lat festival["latitude"]
-        marker.lng festival["longitude"]
+      @hash = Gmaps4rails.build_markers(@fetched_festivals) do |festival, marker|
+        marker.lat festival["latitude"].to_f
+        marker.lng festival["longitude"].to_f
         marker.infowindow festival["title"]
-      end    
-       @response = {:hash => @hash, :fetched_festivals => @fetched_festivals}
-       respond_with @response
+      end 
+       respond_to do |format|
+         format.js
+       end
   end
   
   

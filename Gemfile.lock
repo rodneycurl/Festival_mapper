@@ -248,6 +248,7 @@ DEPENDENCIES
   httparty
   jbuilder (~> 2.0)
   jquery-rails
+  json
   rails (= 4.2.5)
   responders (~> 2.0)
   rspec-rails

@@ -15,8 +15,9 @@
   <!--	</div>-->
   <!--	<div class="clear"></div>-->
   <!--</form>-->
-  <%= button_to "Use current location", { action: "near_latlong"}, method: :get, class: "learnButton" %>  
-    <%= form_tag("/near_zip", method: "get") do %>
+  <!-- next setup param entry -->
+  <!--%= button_to "Use current location", { action: "/festivals/near_latlong"}, method: :get, class: "learnButton" %>  -->
+  <%= form_tag("/festivals/near_zip", method: "get", remote: true) do %>
     <%= label_tag(:chooseZip, "Search by Zip Code") %>
     <%= text_field_tag("textZip", nil, placeholder: 'enter your zip code') %>
     <%= submit_tag("Search", class: "learnButton") %>
