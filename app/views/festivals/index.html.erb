@@ -5,18 +5,7 @@
 <div id="control">
   <h2>Find Events Near You</h2>
   <p>We'll help you find events in your community</p>
-  <!--<form method="get" id="chooseZip">-->
-  <!--	<button type="submit" class="learnButton">Use current location</button>-->
-  <!--	<button type="button" id="searchZip" class="learnButton">Search by Zip Code</button>-->
-  <!--	<div class="clear"></div>-->
-  <!--	<div class="zipSearch">-->
-  <!--		<input id="textZip" type="text" name="zip" placeholder="enter your zip code" autofocus>-->
-  <!--		<button type="submit" class="learnButton">Search</button>-->
-  <!--	</div>-->
-  <!--	<div class="clear"></div>-->
-  <!--</form>-->
-  <!-- next setup param entry -->
-  <!--%= button_to "Use current location", { action: "/festivals/near_latlong"}, method: :get, class: "learnButton" %>  -->
+  <%= button_tag "Use current location", remote: true, class: "learnButton", id: "use-zip" %>  
   <%= form_tag("/festivals/near_zip", method: "get", remote: true) do %>
     <%= label_tag(:chooseZip, "Search by Zip Code") %>
     <%= text_field_tag("textZip", nil, placeholder: 'enter your zip code') %>

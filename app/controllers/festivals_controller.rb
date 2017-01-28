@@ -89,18 +89,17 @@ class FestivalsController < ApplicationController
   
   
   def near_latlong
-      @lat = params[:data][:lat]
-      @long = params[:data][:long]
-      logger.debug "lat=  #{@lat}"
-      logger.debug "long= #{@long}"
-  	  @fetched_festivals = Festival.near_latlong(@lat, @long)
+      @lat = params[:lat]
+      @long = params[:long]
+      @fetched_festivals = Festival.near_latlong(@lat, @long)
   	  @hash = Gmaps4rails.build_markers(@fetched_festivals) do |festival, marker|
-        marker.lat festival["latitude"]
-        marker.lng festival["longitude"]
+        marker.lat festival["latitude"].to_f
+        marker.lng festival["longitude"].to_f
         marker.infowindow festival["title"]
       end    
-       @response = {:hash => @hash, :fetched_festivals => @fetched_festivals}
-       respond_with @response
+       respond_to do |format|
+        format.js { render :file => "../views/festivals/near_zip.js.erb" }
+       end
   end
 
   
