@@ -11,6 +11,7 @@ class FestivalsController < ApplicationController
     @fetched_festivals = Festival.eventful_festivals
     respond_with @json
   end
+  
   def index
     @fetched_festivals ||= Festival.eventful_festivals
     @hash = Gmaps4rails.build_markers(@fetched_festivals) do |festival, marker|
@@ -18,6 +19,8 @@ class FestivalsController < ApplicationController
       marker.lng festival["longitude"]
       marker.infowindow festival["title"]
     end    
+    Rails.logger.debug "fetched festivals #{@fetched_festivals}"  #array
+    Rails.logger.debug "hash #{@hash}" #hash
   end
 
   # GET /festivals/1

@@ -33,28 +33,6 @@ $(function() {
 		} else {
 				alert('Geolocation is not supported in your browser');
 		}
-		// $.getJSON(path, { data }, function(response){
-		// 		fetchedFestivals = response.fetched_festivals;
-		// 		var markerHash = response.hash;
-		// 		handler.removeMarkers(markers); // to remove previous markers
-		// 		handler.resetBounds();
-		// 		newMarkers = handler.addMarkers(markerHash);
-		// 		handler.bounds.extendWith(newMarkers);
-		// 		handler.fitMapToBounds(); 
-		// 		handler.getMap().setZoom(10);
-		// 		$(".main-table tr:gt(0)").remove();
-		// 		$(fetchedFestivals).each(function(index, value) {
-		// 			 var element = document.createElement('tr');
-	 //        $(element).data('dataItem', this);
-	 //        var html = '<td>' + value.title + '</td>' +
-	 //                   '<td>' + value.venue_name + '</td>';
-	 //       $(element).html(html); 
-	 //       $('.main-table #content').append($(element)); //append your new tr
-  //       });
-			
-		// 	});
-		// 	return false; // important: prevent the form from submitting    
-	 // });
 	  
 		//this is no longer needed but leaving it temporarily
   $("#use-zip").click(function(){
