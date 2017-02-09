@@ -1,6 +1,5 @@
 <script type="text/javascript" >
 $( document ).ready(function() {
-  
   //old map handler
   // handler = Gmaps.build('Google');
   // handler.buildMap({
@@ -18,24 +17,33 @@ $( document ).ready(function() {
 		
 		var json_array;
     function createSidebarLi(json){
-      return ("<li><a>" + json.infowindow + "</a></li>");
+      var table_row = '<tr><td>' + json.infowindow + '</td></tr>';
+      return (table_row);
     };
     
-    function bindLiToMarker($li, marker){
-      $li.on('click', function(){
+    
+    
+    function bindLiToMarker($tr, marker){
+      $tr.on('click', function(){
         handler.getMap().setZoom(14);
         marker.setMap(handler.getMap()); 
         marker.panTo();
         google.maps.event.trigger(marker.getServiceObject(), 'click');
-      })
+      });
+      console.log("pre-click function");
+      // google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
+      google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
+         $tr.addClass('table-bg-active').siblings().removeClass('table-bg-active');
+      });
+     
     };
     
     function createSidebar(json_array){
       console.log("json array:" + json_array);
       _.each(json_array, function(json){
-        var $li = $( createSidebarLi(json) );
-        $li.appendTo('#result_list');
-        bindLiToMarker($li, json.marker);
+        var $tr = $( createSidebarLi(json) );
+        $tr.appendTo('.main-table #content');
+        bindLiToMarker($tr, json.marker);
       });
     };
     
@@ -57,6 +65,9 @@ $( document ).ready(function() {
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
     });
+   
+    
+ 
 		
 });	
   
