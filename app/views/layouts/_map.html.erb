@@ -1,20 +1,5 @@
 <script type="text/javascript" >
 $( document ).ready(function() {
-  //old map handler
-  // handler = Gmaps.build('Google');
-  // handler.buildMap({
-  //   provider: { },
-  //   internal: {id: 'map'}}, function(){
-  //   markers = handler.addMarkers(<%=raw @hash.to_json %>);
-  //   handler.bounds.extendWith(markers);
-  //   handler.fitMapToBounds(); 
-  //   handler.getMap().setZoom(10);
-  //   //handler.getMap().setCenter(bounds.getCenter());
-		// //handler.getMap().setCenter({lat: 37.09024, lng: -100.712891});
-  // });
-  
-  	//New Stuff
-		
 		var json_array;
     function createSidebarLi(json){
       var table_row = '<tr><td>' + json.infowindow + '</td></tr>';

@@ -2,7 +2,7 @@
 ** Google Maps using GeoLocation or user input zip code. 
 */
 
-$(function() {
+$(document).ready(function(){
 		var pos;
 	  var userCords;
 	  var newMarkers;
@@ -34,17 +34,17 @@ $(function() {
 				alert('Geolocation is not supported in your browser');
 		}
 	  
-		//this is no longer needed but leaving it temporarily
-  $("#use-zip").click(function(){
-  	    var latlong = { lat:userCords.latitude, long:userCords.longitude};
-  	    $.ajax({
-  			  url: '/festivals/near_latlong',
-    			data: latlong,
-    			type: "GET",
-    			dataType: 'script'
-				});
-				console.log("latlong:" + latlong);
-  });
+	  $("#use-geo").on('click', function(){
+	  			alert('here');
+	  	    var latlong = { lat:userCords.latitude, long:userCords.longitude};
+	  	    console.log("latlong:" + latlong);
+	  	    $.ajax({
+	  			  url: '/festivals/near_latlong',
+	    			data: latlong,
+	    			type: "GET",
+	    			dataType: 'script'
+					});
+	  });
 
    
 });

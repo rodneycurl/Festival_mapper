@@ -5,7 +5,7 @@
 <div id="control">
   <h2>Find Events Near You</h2>
   <p>We'll help you find events in your community</p>
-  <%= button_tag "Use current location", remote: true, class: "learnButton", id: "use-zip" %>  
+  <%= button_tag "Use current location", remote: true, class: "learnButton", id: "use-geo" %>  
   <%= form_tag("/festivals/near_zip", method: "get", remote: true) do %>
     <%= label_tag(:chooseZip, "Search by Zip Code") %>
     <%= text_field_tag("textZip", nil, placeholder: 'enter your zip code') %>

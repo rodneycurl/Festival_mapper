@@ -1,21 +1,60 @@
-var fetchedFestivals = <%= raw @fetched_festivals.to_json %>;
-var markerHash = <%= raw @hash.to_json %>; 
-handler.removeMarkers(markers); 
-handler.resetBounds();
-markers = handler.addMarkers(markerHash);
-handler.bounds.extendWith(markers);
-handler.fitMapToBounds(); 
-handler.getMap().setZoom(10);
-$(".main-table").html("<%=j render :partial =>'layouts/table' %>") 
-
-
-<!--$(".main-table tr:gt(0)").remove();-->
-
-<!--$(fetchedFestivals).each(function(index, value) {-->
-<!--  var element = document.createElement('tr');-->
-<!--  $(element).data('dataItem', this);-->
-<!--  var html = '<td>' + value.title + '</td>' +-->
-<!--            '<td>' + value.venue_name + '</td>';-->
-<!--$(element).html(html); -->
-<!--$('.main-table #content').append($(element)); //append your new tr-->
-<!--console.log('4');-->
+$( document ).ready(function() {
+ $(".main-table tr:gt(0)").remove();
+		
+		var json_array;
+    function createSidebarLi(json){
+   
+      var table_row = '<tr><td>' + json.infowindow + '</td></tr>';
+      return (table_row);
+    };
+    
+    
+    
+    function bindLiToMarker($tr, marker){
+      $tr.on('click', function(){
+        handler.getMap().setZoom(14);
+        marker.setMap(handler.getMap()); 
+        marker.panTo();
+        google.maps.event.trigger(marker.getServiceObject(), 'click');
+      });
+      console.log("pre-click function");
+      // google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
+      google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
+         $tr.addClass('table-bg-active').siblings().removeClass('table-bg-active');
+      });
+     
+    };
+    
+    function createSidebar(json_array){
+      console.log("json array:" + json_array);
+      _.each(json_array, function(json){
+        var $tr = $( createSidebarLi(json) );
+        $tr.appendTo('.main-table #content');
+        bindLiToMarker($tr, json.marker);
+      });
+    };
+    
+    handler = Gmaps.build('Google');
+    handler.buildMap({ internal: {id: 'map'}}, function(){
+      json_array = <%= raw @hash.to_json %>;
+      var festivals = <%= raw @fetched_festivals.to_json %>;
+  
+      console.log("here's the array:"+json_array);
+      console.log("here's the fetched festivals:"+ festivals);
+  
+      var markers = handler.addMarkers(json_array);
+    
+      _.each(json_array, function(json, index){
+          json.marker = markers[index];
+      });
+    
+    createSidebar(json_array);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    });
+   
+    
+ 
+		
+});	
+  

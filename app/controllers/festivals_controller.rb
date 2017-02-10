@@ -19,8 +19,6 @@ class FestivalsController < ApplicationController
       marker.lng festival["longitude"]
       marker.infowindow festival["title"]
     end    
-    Rails.logger.debug "fetched festivals #{@fetched_festivals}"  #array
-    Rails.logger.debug "hash #{@hash}" #hash
   end
 
   # GET /festivals/1
@@ -100,6 +98,8 @@ class FestivalsController < ApplicationController
         marker.lng festival["longitude"].to_f
         marker.infowindow festival["title"]
       end    
+       Rails.logger.debug "fetched festivals #{@fetched_festivals}" 
+       Rails.logger.debug "hash #{@hash}" 
        respond_to do |format|
         format.js { render :file => "../views/festivals/near_zip.js.erb" }
        end
@@ -116,4 +116,4 @@ class FestivalsController < ApplicationController
     def festival_params
       params.require(:festival).permit(:latitude, :longitude, :name, :address)
     end
- end
+end
