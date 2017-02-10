@@ -3,6 +3,8 @@
 */
 
 $(document).ready(function(){
+		console.warn("helo");
+	  alert('here');
 		var pos;
 	  var userCords;
 	  var newMarkers;
@@ -13,6 +15,9 @@ $(document).ready(function(){
 		var toType = function(obj) {
   		return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
 		}
+		 $("#use-geo").on('click', function(){
+		 	alert('here');
+		 });
 		$('td').on('click', function (e) {
     	myRowIndex = $(this).parent().index();
   		  e.stopPropagation();
