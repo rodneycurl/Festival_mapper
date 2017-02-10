@@ -1,10 +1,22 @@
 <script type="text/javascript" >
 $( document ).ready(function() {
  
-    var pos;
+   	var pos;
 	  var userCords;
-	  
-		var json_array;
+	 // var newMarkers;
+	 // var fetchedFestivals;
+	 // var type;
+	 // var path;
+		//Start geolocation
+		// var toType = function(obj) {
+  // 		return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
+		// }
+		$('td').on('click', function (e) {
+    	myRowIndex = $(this).parent().index();
+  		  e.stopPropagation();
+		  	handler.getMap().setZoom(10);
+		  	map.setCenter(markers[1].getPosition());
+		});
 		
 		if (navigator.geolocation) {    
 			function error(err) {
@@ -21,7 +33,7 @@ $( document ).ready(function() {
 		}
 	  
 	  $("#use-geo").on('click', function(){
-	  		 var latlong = { lat:userCords.latitude, long:userCords.longitude};
+	  		  var latlong = { lat:userCords.latitude, long:userCords.longitude};
 	  	    console.log("latlong:" + latlong);
 	  	    $.ajax({
 	  			  url: '/festivals/near_latlong',

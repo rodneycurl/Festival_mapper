@@ -5,8 +5,6 @@ $( document ).ready(function() {
   json_array = <%= raw @hash.to_json %>;
   festivals = <%= raw @fetched_festivals.to_json %>;
 
-  console.log("here's the array:"+json_array);
-  console.log("here's the fetched festivals:"+ festivals);
    
   function createSidebarLi(json){
     return ("<li><a>" + json.name + "</a></li>");
