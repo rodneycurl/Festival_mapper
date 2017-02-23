@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170101161117) do
+ActiveRecord::Schema.define(version: 20170222235348) do
 
   create_table "festivals", force: :cascade do |t|
     t.float    "latitude"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 20170101161117) do
     t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "music_festivals", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.string   "city"
+    t.string   "state"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
 end

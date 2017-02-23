@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'music_festivals/index'
+
   resources :festivals do
     collection do
       get 'near_zip'

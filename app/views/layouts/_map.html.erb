@@ -42,6 +42,16 @@ $( document ).ready(function() {
 	    			dataType: 'script'
 					});
 	  });
+	  
+	  $("#use-music-festival-geo").on('click', function(){
+	  		  var latlong = { lat:userCords.latitude, lng:userCords.longitude};
+	  	    console.log("latlong:" + latlong.lat + latlong.lng);
+           //change map's center to focus on user's geoloc if asked
+           handler.map.centerOn(latlong);
+           handler.getMap().setZoom(10);
+		  	
+           
+	  });
 
 		
     function createSidebarLi(json){
