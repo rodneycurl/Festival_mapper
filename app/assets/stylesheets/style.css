@@ -3,7 +3,7 @@
 html, body, .main {
 	height: 100%;
 	margin: 0px;
-	padding: 0px
+	padding: 0px;
   }
 
 body {
@@ -14,6 +14,9 @@ body {
 	background-color: #6B7283;
 }
 
+h1 {
+	text-align: center;
+}
 
 .clearfix:after { 
    content: " ";
@@ -76,7 +79,7 @@ ul li{
 }
 
 .table-bg-active{
-    background-color: #BE757E
+    background-color: #1584c4
 }
 .twitter{
 	float: left;
@@ -116,6 +119,7 @@ ul li{
 		height: 100%;
 		padding: 10px 30px 10px 30px;
 		border-right: 1px solid black;
+		overflow:auto;
 	}
 
 	#control input[type=text]{
@@ -129,7 +133,7 @@ ul li{
 	.learnButton {
 		margin-top: 10px;
 		margin-bottom: 20px;
-		background: #BE757E;
+		background: #1584c4;
 		border: 0;
 		color: #D8D8DD;
 		height: 37px;
@@ -175,6 +179,7 @@ ul li{
 	#control{
 		color: #D8D8DD;
 		padding: 20px 30px 10px 30px;
+		background-color: #f2f2f2;
 	}
 
 	#control input[type=text]{

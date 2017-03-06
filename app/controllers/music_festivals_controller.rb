@@ -5,6 +5,7 @@ class MusicFestivalsController < ApplicationController
       marker.lat festival["latitude"]
       marker.lng festival["longitude"]
       marker.infowindow festival["name"]
+      marker.json({ :state => festival["state"]})
     end    
   end
 end

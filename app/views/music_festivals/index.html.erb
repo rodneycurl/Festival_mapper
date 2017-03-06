@@ -3,8 +3,8 @@
 <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
 <!--<p id="notice"><%= notice %></p>-->
 <div id="control">
-  <h2>Find Events Near You</h2>
-  <p>We'll help you find events in your community</p>
+  <h1>Hip Hop Festival Guide</h1>
+  <p>Find the best hip hop festivals in your city. See the best hip hop artists from around the world</p>
   <%= button_tag "Use current location", remote: true, class: "learnButton", id: "use-music-festival-geo" %>  
   <!--<%= form_tag("/music_festivals/near_zip", method: "get", remote: true) do %>-->
   <!--  <%= label_tag(:chooseZip, "Search by Zip Code") %>-->
@@ -14,7 +14,7 @@
   <%= render 'layouts/social' %>
   <div class="clear"></div>
   <div id="results"></div>
-  <h1>Events Near You</h1>
+  <h2>Festivals Near You</h2>
   <div id="result_list"></div>
   <%= render 'layouts/table' %>
 </div>  

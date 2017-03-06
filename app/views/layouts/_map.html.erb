@@ -48,14 +48,15 @@ $( document ).ready(function() {
 	  	    console.log("latlong:" + latlong.lat + latlong.lng);
            //change map's center to focus on user's geoloc if asked
            handler.map.centerOn(latlong);
-           handler.getMap().setZoom(10);
+           handler.getMap().setZoom(7);
 		  	
            
 	  });
 
 		
     function createSidebarLi(json){
-      var table_row = '<tr><td>' + json.infowindow + '</td></tr>';
+      console.log(json);
+      var table_row = '<tr><td>' + json.infowindow + '</td><td>'+json.state+'</td></tr>';
       return (table_row);
     };
     

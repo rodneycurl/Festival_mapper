@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'music_festivals/index'
-
   resources :festivals do
     collection do
       get 'near_zip'
@@ -8,7 +6,9 @@ Rails.application.routes.draw do
       get 'fetch'
     end
   end
-  root 'festivals#index'
+  #get 'festivals#index'
+  root 'music_festivals#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
