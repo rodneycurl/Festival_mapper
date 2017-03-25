@@ -13,6 +13,7 @@ class FestivalsController < ApplicationController
   end
   
   def index
+    
     @fetched_festivals ||= Festival.eventful_festivals
     @hash = Gmaps4rails.build_markers(@fetched_festivals) do |festival, marker|
       marker.lat festival["latitude"]

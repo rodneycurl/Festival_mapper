@@ -1,0 +1,16 @@
+<table class="main-table table table-hover">
+  <thead>
+    <tr>
+      <th><%= sortable "name" %></th>
+      <th><%= sortable "state" %></th>
+    </tr>
+  </thead>
+  <tbody id="content">
+     <% @fetched_festivals.each do |festival| %>
+      <tr>
+        <td><%= festival["name"] %></td>
+        <td><%= festival["state"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

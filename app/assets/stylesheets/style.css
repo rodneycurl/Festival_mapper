@@ -68,19 +68,37 @@ ul li{
 	line-height: 1.9;
 }
 
+.margin-top{
+	margin-top: 5px;
+}
 
 .zipSearch{
 	display: none;
 }
 
-/* Popup */
-.markerPop{
-	
+th .current {
+  padding-right: 20px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 18px 18px;
+}
+
+th .asc {
+  background-image: url(sort_up.png);
+}
+
+th .desc {
+  background-image: url(sort_down.png); /*no-repeat 99% 2px #FFFFFF*/
 }
 
 .table-bg-active{
     background-color: #1584c4
 }
+
+.table th.hilite {
+  background-color: yellow;
+}
+
 .twitter{
 	float: left;
 }
