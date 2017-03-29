@@ -32,25 +32,14 @@
         google.maps.event.trigger(marker.getServiceObject(), 'click');
       });
       console.log("pre-click function");
-      // google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
-      google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
-        var y = $tr.position().top,
-        h = $(window).height();
-
-        if(y > h/2) {
-            $("body").animate({
-                scrollTop: y - h/2
-            }, 2000);
-        };
+     google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
+         $tr.get(0).scrollIntoView();
          $tr.addClass('table-bg-active').siblings().removeClass('table-bg-active');
       });
      
     };
     
     var w = $(window);
-
-
-    
     function createSidebar(json_array){
       console.log("json array:" + json_array);
       _.each(json_array, function(json){
