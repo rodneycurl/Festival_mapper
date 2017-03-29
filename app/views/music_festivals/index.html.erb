@@ -3,12 +3,6 @@
 <div id="control">
   <h1>Hip Hop Festival Guide</h1>
   <p>Find the best hip hop festivals in your city. See the best hip hop artists from around the world</p>
-  <!--<%= button_tag "Use current location", remote: true, class: "learnButton", id: "use-music-festival-geo" %>  -->
-  <!--<%= form_tag("/music_festivals/near_zip", method: "get", remote: true) do %>-->
-  <!--  <%= label_tag(:chooseZip, "Search by Zip Code") %>-->
-  <!--  <%= text_field_tag("textZip", nil, placeholder: 'enter your zip code') %>-->
-  <!--  <%= submit_tag("Search", class: "learnButton") %>-->
-  <!--<% end %>-->
   <div class="clear"></div>
   <div id="results"></div>
    <%= form_tag root_path, :method  => 'get' do %>

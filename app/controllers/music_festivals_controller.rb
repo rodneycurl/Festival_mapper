@@ -1,20 +1,12 @@
 class MusicFestivalsController < ApplicationController
   helper_method :sort_column, :sort_direction
   def index
-    # if !sort_column.empty?
     if params[:state].present?
       @fetched_festivals = MusicFestival.state(params[:state]).order(sort_column + " " + sort_direction)
     else
       @fetched_festivals = MusicFestival.order(sort_column + " " + sort_direction)
     end
-    # else 
-      # @fetched_festivals = MusicFestival.all
-    # end
-   # @fetched_festivals = MusicFestival.all
-    #@products = @products.status(params[:status]) if params[:status].present?
     @states = MusicFestival.find_by_sql("SELECT state FROM music_festivals GROUP BY state").map &:state
-    #@names = MusicFestival.find_by_sql("SELECT name FROM music_festivals GROUP BY name").map &:name
-
     @hash = Gmaps4rails.build_markers(@fetched_festivals) do |festival, marker|
       marker.lat festival["latitude"]
       marker.lng festival["longitude"]
