@@ -11,7 +11,7 @@ class MusicFestivalsController < ApplicationController
       marker.lat festival["latitude"]
       marker.lng festival["longitude"]
       marker.infowindow festival["name"]
-      marker.json({ :state => festival["state"]})
+      marker.json({ :state => festival["state"], :month => festival["start_date"]})
     end    
     
     #add respond with js
